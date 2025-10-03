@@ -9,15 +9,21 @@ function UserDetails() {
   useEffect(() => {
     setLoading(true);
     fetch(`https://jsonplaceholder.typicode.com/users/${id}`)
-      .then((res) => res.json())
+      .then((res) => {
+        if (!res.ok) throw new Error("User not found");
+        return res.json();
+      })
       .then((data) => {
         setUser(data);
+        setLoading(false);
+      })
+      .catch(() => {
+        setUser(null);
         setLoading(false);
       });
   }, [id]);
 
   if (loading) return <div>Loading...</div>;
-
   if (!user) return <div>User not found</div>;
 
   return (
