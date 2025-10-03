@@ -7,7 +7,11 @@ function UserList() {
   useEffect(() => {
     fetch("https://jsonplaceholder.typicode.com/users")
       .then((res) => res.json())
-      .then(setUsers);
+      .then(setUsers)
+      .catch((err) => {
+        console.error("Failed to fetch users", err);
+        setUsers([]); // set empty array on error to avoid infinite loading
+      });
   }, []);
 
   return (
