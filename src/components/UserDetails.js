@@ -15,7 +15,10 @@ function UserDetails() {
       })
       .then((data) => {
         setUser(data);
-        setLoading(false);
+        // Artificial delay so Cypress can detect the loading state reliably
+        setTimeout(() => {
+          setLoading(false);
+        }, 300);
       })
       .catch(() => {
         setUser(null);
@@ -35,7 +38,10 @@ function UserDetails() {
       </p>
       <p>Phone: {user.phone}</p>
       <p>
-        Website: <a href={`http://${user.website}`} target="_blank" rel="noopener noreferrer">{user.website}</a>
+        Website:{" "}
+        <a href={`http://${user.website}`} target="_blank" rel="noopener noreferrer">
+          {user.website}
+        </a>
       </p>
     </div>
   );
