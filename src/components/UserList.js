@@ -6,16 +6,15 @@ function UserList() {
 
   useEffect(() => {
     fetch("https://jsonplaceholder.typicode.com/users")
-      .then(res => res.json())
-      .then(setUsers)
-      .catch(console.error);
+      .then((res) => res.json())
+      .then(setUsers);
   }, []);
 
   return (
     <div>
       <h1>User List</h1>
       <ul>
-        {users.map(user => (
+        {users.map((user) => (
           <li key={user.id}>
             <Link to={`/users/${user.id}`}>{user.name}</Link>
           </li>
